@@ -2,12 +2,12 @@ const birthdate = document.querySelector("#birthday");
 const checkBtn = document.querySelector("#checkBtn");
 const resultDiv = document.querySelector(".result");
 
-function message(msg) {
+const message = msg => {
   resultDiv.innerText = msg;
 }
 
 // Function to Reverse a string
-function reverseString(str) {
+const reverseString = str => {
   if (str === "") {
     return "";
   } else {
@@ -15,26 +15,26 @@ function reverseString(str) {
   }
 }
 // Function to check palindrome string
-function isStringPalindrome(str) {
+const isStringPalindrome = str => {
   var reversedString = reverseString(str);
   return str === reversedString;
 }
 
 // Function to accept dates in all formats
-function getDateInAllFormats(date) {
-  var ddmmyyyy = date.day + date.month + date.year;
-  var mmddyyyy = date.month + date.day + date.year;
-  var yyyymmdd = date.year + date.month + date.day;
-  var ddmmyy = date.day + date.month + date.year.slice(-2);
-  var mmddyy = date.month + date.day + date.year.slice(-2);
-  var yyddmm = date.year.slice(-2) + date.day + date.month;
+const getDateInAllFormats = date => {
+  let ddmmyyyy = date.day + date.month + date.year;
+  let mmddyyyy = date.month + date.day + date.year;
+  let yyyymmdd = date.year + date.month + date.day;
+  let ddmmyy = date.day + date.month + date.year.slice(-2);
+  let mmddyy = date.month + date.day + date.year.slice(-2);
+  let yyddmm = date.year.slice(-2) + date.day + date.month;
 
   return [ddmmyyyy, mmddyyyy, yyyymmdd, ddmmyy, mmddyy, yyddmm];
 }
 
 // Function to get string data
-function getDateAsString(date) {
-  var dateInStr = { day: "", month: "", year: "" };
+const getDateAsString = date => {
+  let dateInStr = { day: "", month: "", year: "" };
 
   if (date.day < 10) {
     dateInStr.day = "0" + date.day;
@@ -53,18 +53,18 @@ function getDateAsString(date) {
 }
 
 // Function to check palindrome dates
-function checkPalindromeAll(date) {
-  var dateFormatList = getDateInAllFormats(date);
-  var palindromeDateArray = [];
+const checkPalindromeAll = date => {
+  let dateFormatList = getDateInAllFormats(date);
+  let palindromeDateArray = [];
 // adding values to 
   for (var i = 0; i < dateFormatList.length; i++) {
-    var result = isStringPalindrome(dateFormatList[i]);
+    let result = isStringPalindrome(dateFormatList[i]);
     palindromeDateArray.push(result);
   }
   return palindromeDateArray;
 }
 // Function to check leap year
-function isLeapYear(year) {
+const isLeapYear = year => {
   if (year % 400 === 0) return true;
 
   if (year % 100 === 0) return false;
@@ -74,10 +74,10 @@ function isLeapYear(year) {
   return false;
 }
 
-function getNextDate(date) {
-  var day = date.day + 1;
-  var month = date.month;
-  var year = date.year;
+const getNextDate = date => {
+  let day = date.day + 1;
+  let month = date.month;
+  let year = date.year;
 
   var daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
@@ -112,14 +112,14 @@ function getNextDate(date) {
   };
 }
 // function to get next palindrome date
-function getNextPalindromeDate(date) {
-  var nextDate = getNextDate(date);
-  var ctr = 0;
+const getNextPalindromeDate = date => {
+  let nextDate = getNextDate(date);
+  let ctr = 0;
 
   while (1) {
     ctr++;
-    var dateStr = getDateAsString(nextDate);
-    var resultList = checkPalindromeAll(dateStr);
+    let dateStr = getDateAsString(nextDate);
+    let resultList = checkPalindromeAll(dateStr);
 
     for (let i = 0; i < resultList.length; i++) {
       if (resultList[i]) {
@@ -130,10 +130,10 @@ function getNextPalindromeDate(date) {
   }
 }
 
-function getPreviousDate(date) {
-  var day = date.day - 1;
-  var month = date.month;
-  var year = date.year;
+const getPreviousDate = date => {
+  let day = date.day - 1;
+  let month = date.month;
+  let year = date.year;
 
   var daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
@@ -162,15 +162,15 @@ function getPreviousDate(date) {
   };
 }
 // Function to get previous palindrome date
-function getPreviousPalindromeDate(date) {
+const getPreviousPalindromeDate = date => {
     
-  var previousDate = getPreviousDate(date);
-  var ctr = 0;
+  let previousDate = getPreviousDate(date);
+  let ctr = 0;
 
   while (1) {
     ctr++;
-    var dateStr = getDateAsString(previousDate);
-    var resultList = checkPalindromeAll(dateStr);
+    let dateStr = getDateAsString(previousDate);
+    let resultList = checkPalindromeAll(dateStr);
 
     for (let i = 0; i < resultList.length; i++) {
       if (resultList[i]) {
@@ -182,25 +182,25 @@ function getPreviousPalindromeDate(date) {
 }
 
 // Main function to check palindrome
-function checkPalindrome() {
+const checkPalindrome = () => {
     
-  var birthdayStr = birthday.value;
+  let birthdayStr = birthday.value;
 
   if (birthdayStr !== "") {
-    var date = birthdayStr.split("-");
-    var yyyy = date[0];
-    var mm = date[1];
-    var dd = date[2];
+    let date = birthdayStr.split("-");
+    let yyyy = date[0];
+    let mm = date[1];
+    let dd = date[2];
 
-    var date = {
+    let date = {
       day: Number(dd),
       month: Number(mm),
       year: Number(yyyy),
     };
 
-    var dateStr = getDateAsString(date);
-    var list = checkPalindromeAll(dateStr);
-    var isPalindrome = false;
+    let dateStr = getDateAsString(date);
+    let list = checkPalindromeAll(dateStr);
+    let isPalindrome = false;
 
     for (let i = 0; i < list.length; i++) {
       if (list[i]) {
